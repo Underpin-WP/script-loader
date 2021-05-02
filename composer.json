@@ -1,0 +1,17 @@
+{
+  "name": "underpin/scripts-loader",
+  "description": "Script Loader for Underpin",
+  "type": "library",
+  "license": "GPL 2.0",
+  "authors": [
+    {
+      "name": "Alex Standiford",
+      "email": "a@alexstandiford.com"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "scripts.php"
+    ]
+  }
+}
