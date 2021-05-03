@@ -1,5 +1,5 @@
 {
-  "name": "underpin/scripts-loader",
+  "name": "underpin/script-loader",
   "description": "Script Loader for Underpin",
   "type": "library",
   "license": "GPL 2.0",
