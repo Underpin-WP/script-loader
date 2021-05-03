@@ -32,6 +32,8 @@ class Scripts extends Loader_Registry {
 	 */
 	protected $abstraction_class = '\Underpin_Scripts\Abstracts\Script';
 
+	protected $default_factory = '\Underpin_Scripts\Factories\Script_Instance';
+
 	/**
 	 * @inheritDoc
 	 */
