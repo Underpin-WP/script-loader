@@ -9,6 +9,9 @@
       "email": "a@alexstandiford.com"
     }
   ],
+  "require": {
+    "underpin/underpin": "1.2.*"
+  },
   "autoload": {
     "files": [
       "scripts.php"
