@@ -10,6 +10,7 @@
 namespace Underpin_Scripts\Factories;
 
 
+use Underpin\Traits\Instance_Setter;
 use Underpin_Scripts\Abstracts\Script;
 use function Underpin\underpin;
 
@@ -25,15 +26,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Underpin\Abstracts
  */
 class Script_Instance extends Script {
+	use Instance_Setter;
 
 	public function __construct( $args = [] ) {
 		// Override default params.
-		foreach ( $args as $arg => $value ) {
-			if ( isset( $this->$arg ) ) {
-				$this->$arg = $value;
-				unset( $args[ $arg ] );
-			}
-		}
+		$this->set_values( $args );
 
 		parent::__construct();
 	}
