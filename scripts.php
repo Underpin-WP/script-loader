@@ -11,4 +11,4 @@ add_action( 'underpin/before_setup', function ( $instance ) {
 		$instance->loaders()->add( 'scripts', [
 			'registry' => 'Underpin_Scripts\Loaders\Scripts',
 		] );
-} );
+}, 5 );
