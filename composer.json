@@ -2,7 +2,7 @@
   "name": "underpin/script-loader",
   "description": "Script Loader for Underpin",
   "type": "library",
-  "license": "GPL 2.0",
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Alex Standiford",
