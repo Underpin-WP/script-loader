@@ -94,6 +94,24 @@ abstract class Script {
 		if ( empty( $this->localized_var ) ) {
 			$this->localized_var = $this->handle;
 		}
+
+		if ( is_string( $this->deps ) ) {
+			if ( file_exists( $this->deps ) ) {
+				$this->deps = require( $this->deps );
+				$this->deps = wp_parse_args( $this->deps, [ 'dependencies' => [], 'version' => '' ] );
+			} else {
+				underpin()->logger()->log(
+					'error',
+					'dependencies_file_not_found',
+					'A dependency file was specified, but it could not be found.',
+					[
+						'handle' => $this->handle,
+						'file'   => $this->deps,
+					]
+				);
+				$this->deps = [];
+			}
+		}
 	}
 
 
