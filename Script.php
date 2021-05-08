@@ -97,7 +97,7 @@ abstract class Script {
 
 		if ( is_string( $this->deps ) ) {
 			if ( file_exists( $this->deps ) ) {
-				$file          = wp_parse_args( require( $this->deps, [ 'dependencies' => [], 'version' => '' ] );
+				$file          = wp_parse_args( require( $this->deps ), [ 'dependencies' => [], 'version' => '' ] );
 				$this->deps    = $file['dependencies'];
 				$this->version = $file['version'];
 			} else {
