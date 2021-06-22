@@ -19,7 +19,7 @@ class Enqueue_Admin_Script extends Middleware {
 
 	function do_actions() {
 		if ( $this->loader_item instanceof Script ) {
-			add_action( 'admin_enqueue_script', [ $this->loader_item, 'enqueue' ] );
+			add_action( 'admin_enqueue_scripts', [ $this->loader_item, 'enqueue' ] );
 		} else {
 			underpin()->logger()->log( 'warning', 'rest_middleware_action_failed_to_run', 'Middleware action failed to run. Rest_Middleware expects to run on a Script loader.', [
 				'loader'  => get_class( $this->loader_item ),
