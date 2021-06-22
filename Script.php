@@ -10,6 +10,7 @@
 namespace Underpin_Scripts\Abstracts;
 
 use Underpin\Traits\Feature_Extension;
+use Underpin\Traits\Middleware;
 use WP_Error;
 use function Underpin\underpin;
 
@@ -25,7 +26,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Underpin\Abstracts
  */
 abstract class Script {
+
 	use Feature_Extension;
+	use Middleware;
 
 	/**
 	 * The handle for this script.
@@ -259,17 +262,16 @@ abstract class Script {
 				'error',
 				'script_was_not_registered',
 				'The script ' . $this->handle . ' failed to register. That is all I know, unfortunately.',
-				['ref' => $this->handle]
+				[ 'ref' => $this->handle ]
 			);
 		} else {
 			underpin()->logger()->log(
 				'notice',
 				'script_was_registered',
 				'The script ' . $this->handle . ' registered successfully.',
-				['ref' => $this->handle]
+				[ 'ref' => $this->handle ]
 			);
 		}
-
 	}
 
 	/**
@@ -287,23 +289,24 @@ abstract class Script {
 				'notice',
 				'script_was_enqueued',
 				'The script ' . $this->handle . ' has been enqueued.',
-				['ref' => $this->handle]
+				[ 'ref' => $this->handle ]
 			);
 		} else {
 			underpin()->logger()->log(
 				'error',
 				'script_failed_to_enqueue',
 				'The script ' . $this->handle . ' failed to enqueue.',
-				['ref' => $this->handle]
+				[ 'ref' => $this->handle ]
 			);
 		}
 
 	}
+
 	public function __get( $key ) {
 		if ( isset( $this->$key ) ) {
 			return $this->$key;
 		} else {
-			return new WP_error( 'batch_task_param_not_set', 'The batch task key ' . $key . ' could not be found.' );
+			return new WP_Error( 'batch_task_param_not_set', 'The batch task key ' . $key . ' could not be found.' );
 		}
 	}
 
