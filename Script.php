@@ -100,9 +100,13 @@ abstract class Script {
 
 		if ( is_string( $this->deps ) ) {
 			if ( file_exists( $this->deps ) ) {
-				$file          = wp_parse_args( require( $this->deps ), [ 'dependencies' => [], 'version' => '' ] );
-				$this->deps    = $file['dependencies'];
-				$this->version = $file['version'];
+				$file       = wp_parse_args( require( $this->deps ), [ 'dependencies' => [], 'version' => '' ] );
+				$this->deps = $file['dependencies'];
+
+				// Only set the version if a version has not been specified otherwise.
+				if ( false === $this->ver ) {
+					$this->ver = $file['version'];
+				}
 			} else {
 				underpin()->logger()->log(
 					'error',

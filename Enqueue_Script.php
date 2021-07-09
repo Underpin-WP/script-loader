@@ -14,8 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Enqueue_Script extends Middleware {
 
-	public $description = 'Sets up script params necessary for AJAX and REST requests';
-	public $name        = 'REST Middleware';
+	public $description = 'Enqueues a script on the front end';
+	public $name        = 'Enqueue Script';
 
 	function do_actions() {
 		if ( $this->loader_item instanceof Script ) {
