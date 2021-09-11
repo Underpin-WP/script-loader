@@ -9,6 +9,7 @@ add_action( 'underpin/before_setup', function ( $file, $class ) {
 	require_once( plugin_dir_path( __FILE__ ) . 'lib/loaders/Scripts.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'lib/factories/Script_Instance.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'lib/factories/Enqueue_Admin_Script.php' );
+	require_once( plugin_dir_path( __FILE__ ) . 'lib/factories/Enqueue_Login_Script.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'lib/factories/Enqueue_Script.php' );
 	Underpin\underpin()->get( $file, $class )->loaders()->add( 'scripts', [
 		'registry' => 'Underpin_Scripts\Loaders\Scripts',
