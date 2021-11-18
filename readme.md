@@ -174,6 +174,67 @@ underpin()->scripts()->add( 'test', [
 ] );
 ```
 
+#### Enqueuing Conditionally
+
+A common scenario when enqueuing a script is to enqueue it under certain conditions. This can be handled using
+conditional middleware, using the array-based syntax for `Underpin::make_class`
+
+For example, say you only want to enqueue a script on a specific admin page:
+
+```php
+underpin()->scripts()->add( 'test', [
+        'handle'      => 'test',
+        'src'         => 'path/to/script/src',
+        'name'        => 'test',
+        'description' => 'The description',
+        'middlewares' => [
+          [
+            'class' => 'Underpin_Scripts\Factories\Enqueue_Admin_Script_Conditional',
+            'args'  => [
+              'should_enqueue_callback' => function(Script $script){
+                return get_current_screen()->id === 'custom_screen_id';
+              }
+            ] 
+          ]
+        ]
+] );
+```
+
+Another example, say you only want enqueue on the home page:
+
+```php
+underpin()->scripts()->add( 'test', [
+        'handle'      => 'test',
+        'src'         => 'path/to/script/src',
+        'name'        => 'test',
+        'description' => 'The description',
+        'middlewares' => [
+          [
+            'class' => 'Underpin_Scripts\Factories\Enqueue_Script_Conditional',
+            'args'  => [
+              'should_enqueue_callback' => 'is_home'
+            ] 
+          ]
+        ]
+] );
+```
+
+#### Enqueuing Blocks
+
+An increasingly common scenario with scripts is to enqueue a block script. This can be done like so:
+
+```php
+underpin()->scripts()->add( 'test', [
+        'handle'      => 'test',
+        'src'         => 'path/to/script/src',
+        'name'        => 'test',
+        'description' => 'The description',
+        'middlewares' => [
+          'class' => 'Underpin_Scripts\Factories\Enqueue_Block_Script',
+        ]
+] );
+```
+
 ### Create Your Own Middleware
 
 The `middlewares` array uses `Underpin::make_class` to create the class instances. This means that you can pass either:
