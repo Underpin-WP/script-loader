@@ -159,6 +159,20 @@ underpin()->scripts()->add( 'test', [
 ] );
 ```
 
+To enqueue on the login screen:
+
+```php
+underpin()->scripts()->add( 'test', [
+        'handle'      => 'test',
+        'src'         => 'path/to/script/src',
+        'name'        => 'test',
+        'description' => 'The description',
+        'middlewares' => [
+          'Underpin_Scripts\Factories\Enqueue_Login_Script'
+        ]
+] );
+```
+
 To enqueue on both front-end and back-end:
 
 ```php
