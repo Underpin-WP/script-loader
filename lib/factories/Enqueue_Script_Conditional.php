@@ -3,6 +3,7 @@
 namespace Underpin_Scripts\Factories;
 
 
+use Underpin\Abstracts\Storage;
 use Underpin\Traits\Instance_Setter;
 use Underpin_Scripts\Abstracts\Enqueue_Conditional;
 use Underpin_Scripts\Abstracts\Script;
@@ -13,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Enqueue_Script_Conditional extends Enqueue_Conditional {
+
 	use Instance_Setter;
 
 	public $description = 'Conditionally enqueues a script on the front end';
@@ -21,6 +23,7 @@ class Enqueue_Script_Conditional extends Enqueue_Conditional {
 
 	public function __construct( $args ) {
 		$this->set_values( $args );
+		parent::__construct( $args );
 	}
 
 	public function enqueue() {
@@ -41,7 +44,9 @@ class Enqueue_Script_Conditional extends Enqueue_Conditional {
 		return $this->set_callable( $this->should_enqueue_callback, $this->loader_item );
 	}
 
-	function do_actions() {
+	public function update( $instance, Storage $args ) {
+		parent::update( $instance, $args );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
 	}
+
 }

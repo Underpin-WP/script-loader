@@ -4,6 +4,7 @@
 namespace Underpin_Scripts\Factories;
 
 
+use Underpin\Abstracts\Storage;
 use Underpin_Scripts\Abstracts\Enqueue_Conditional;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,7 +18,8 @@ class Enqueue_Block_Script extends Enqueue_Conditional {
 	public $description = 'Enqueues a script on admin pages using the block editor';
 	public $name        = 'Enqueue Block Script';
 
-	function do_actions() {
+	public function update( $instance, Storage $args ) {
+		parent::update( $instance, $args );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue' ] );
 	}
 

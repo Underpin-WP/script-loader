@@ -9,7 +9,7 @@
 
 namespace Underpin_Scripts\Loaders;
 
-use Underpin\Abstracts\Registries\Loader_Registry;
+use Underpin\Abstracts\Registries\Object_Registry;
 use Underpin_Scripts\Abstracts\Script;
 use WP_Error;
 use function Underpin\underpin;
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since   1.0.0
  * @package Underpin\Registries\Loaders
  */
-class Scripts extends Loader_Registry {
+class Scripts extends Object_Registry {
 
 	/**
 	 * @inheritDoc
