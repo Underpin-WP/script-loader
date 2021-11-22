@@ -21,7 +21,7 @@ Underpin::attach( 'setup', new \Underpin\Factories\Observer( 'scripts', [
 		require_once( plugin_dir_path( __FILE__ ) . 'lib/factories/Enqueue_Admin_Script_Conditional.php' );
 		require_once( plugin_dir_path( __FILE__ ) . 'lib/factories/Enqueue_Block_Script.php' );
 		$plugin->loaders()->add( 'scripts', [
-			'registry' => 'Underpin_Scripts\Loaders\Scripts',
+			'class' => 'Underpin_Scripts\Loaders\Scripts',
 		] );
 	},
 ] ) );
