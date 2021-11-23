@@ -7,12 +7,13 @@
  */
 
 
-namespace Underpin_Scripts\Abstracts;
+namespace Underpin\Scripts\Abstracts;
 
+use Underpin\Loaders\Logger;
 use Underpin\Traits\Feature_Extension;
-use Underpin\Traits\Middleware;
+use Underpin\Traits\With_Middleware;
 use WP_Error;
-use function Underpin\underpin;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -28,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class Script {
 
 	use Feature_Extension;
-	use Middleware;
+	use With_Middleware;
 
 	/**
 	 * The handle for this script.
@@ -108,7 +109,7 @@ abstract class Script {
 					$this->ver = $file['version'];
 				}
 			} else {
-				underpin()->logger()->log(
+				Logger::log(
 					'error',
 					'dependencies_file_not_found',
 					'A dependency file was specified, but it could not be found.',
@@ -182,7 +183,7 @@ abstract class Script {
 
 		// If the script is already enqueued, return an error.
 		if ( $this->is_enqueued() ) {
-			return underpin()->logger()->log_as_error(
+			return Logger::log_as_error(
 				'error',
 				'param_set_too_late',
 				'The localized param ' . $key . ' was set after the script was already enqueued.',
@@ -207,7 +208,7 @@ abstract class Script {
 
 		// If the script is already enqueued, return an error.
 		if ( wp_script_is( $this->handle ) ) {
-			return underpin()->logger()->log_as_error(
+			return Logger::log_as_error(
 				'error',
 				'param_removed_too_late',
 				'The localized param ' . $key . ' attempted to be removed after the script was already enqueued.',
@@ -235,14 +236,14 @@ abstract class Script {
 			$localized = wp_localize_script( $this->handle, $this->localized_var, $localized_params );
 
 			if ( false === $localized ) {
-				underpin()->logger()->log(
+				Logger::log(
 					'error',
 					'script_was_not_localized',
 					'The script ' . $this->handle . ' failed to localize. That is all I know, unfortunately.',
 					[ 'handle' => $this->handle, 'params' => $localized_params ]
 				);
 			} else {
-				underpin()->logger()->log(
+				Logger::log(
 					'notice',
 					'script_was_localized',
 					'The script ' . $this->handle . ' localized successfully.',
@@ -262,14 +263,14 @@ abstract class Script {
 		$registered = wp_register_script( $this->handle, $this->src, $this->deps, $this->ver, $this->in_footer );
 
 		if ( false === $registered ) {
-			underpin()->logger()->log(
+			Logger::log(
 				'error',
 				'script_was_not_registered',
 				'The script ' . $this->handle . ' failed to register. That is all I know, unfortunately.',
 				[ 'ref' => $this->handle ]
 			);
 		} else {
-			underpin()->logger()->log(
+			Logger::log(
 				'notice',
 				'script_was_registered',
 				'The script ' . $this->handle . ' registered successfully.',
@@ -289,14 +290,14 @@ abstract class Script {
 
 		// Confirm it was enqueued.
 		if ( wp_script_is( $this->handle, 'enqueued' ) ) {
-			underpin()->logger()->log(
+			Logger::log(
 				'notice',
 				'script_was_enqueued',
 				'The script ' . $this->handle . ' has been enqueued.',
 				[ 'ref' => $this->handle ]
 			);
 		} else {
-			underpin()->logger()->log(
+			Logger::log(
 				'error',
 				'script_failed_to_enqueue',
 				'The script ' . $this->handle . ' failed to enqueue.',

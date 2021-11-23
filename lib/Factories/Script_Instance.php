@@ -7,12 +7,12 @@
  */
 
 
-namespace Underpin_Scripts\Factories;
+namespace Underpin\Scripts\Factories;
 
 
 use Underpin\Traits\Instance_Setter;
-use Underpin_Scripts\Abstracts\Script;
-use function Underpin\underpin;
+use Underpin\Scripts\Abstracts\Script;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
