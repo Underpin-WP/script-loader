@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Underpin_Scripts\Factories;
+namespace Underpin\Scripts\Factories;
 
 
 use Underpin\Abstracts\Observer;
 use Underpin\Abstracts\Storage;
-use Underpin_Scripts\Abstracts\Script;
-use function Underpin\underpin;
+use Underpin\Loaders\Logger;
+use Underpin\Scripts\Abstracts\Script;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -22,9 +22,9 @@ class Enqueue_Admin_Script extends Observer {
 		if ( $instance instanceof Script ) {
 			add_action( 'admin_enqueue_scripts', [ $instance, 'enqueue' ] );
 		} else {
-			underpin()->logger()->log( 'warning', 'rest_middleware_action_failed_to_run', 'Middleware action failed to run. Rest_Middleware expects to run on a Script loader.', [
+			Logger::log( 'warning', 'rest_middleware_action_failed_to_run', 'Middleware action failed to run. Rest_Middleware expects to run on a Script loader.', [
 				'loader'  => get_class( $this->loader_item ),
-				'expects' => 'Underpin_Scripts\Abstracts\Script',
+				'expects' => 'Underpin\Scripts\Abstracts\Script',
 			] );
 		}
 	}

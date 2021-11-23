@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Underpin_Scripts\Factories;
+namespace Underpin\Scripts\Factories;
 
 
 use Underpin\Abstracts\Storage;
-use Underpin_Scripts\Abstracts\Enqueue_Conditional;
+use Underpin\Scripts\Abstracts\Enqueue_Conditional;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

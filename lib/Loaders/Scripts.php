@@ -7,12 +7,13 @@
  */
 
 
-namespace Underpin_Scripts\Loaders;
+namespace Underpin\Scripts\Loaders;
 
 use Underpin\Abstracts\Registries\Object_Registry;
-use Underpin_Scripts\Abstracts\Script;
+use Underpin\Loaders\Logger;
+use Underpin\Scripts\Abstracts\Script;
 use WP_Error;
-use function Underpin\underpin;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -30,9 +31,9 @@ class Scripts extends Object_Registry {
 	/**
 	 * @inheritDoc
 	 */
-	protected $abstraction_class = '\Underpin_Scripts\Abstracts\Script';
+	protected $abstraction_class = '\Underpin\Scripts\Abstracts\Script';
 
-	protected $default_factory = '\Underpin_Scripts\Factories\Script_Instance';
+	protected $default_factory = '\Underpin\Scripts\Factories\Script_Instance';
 
 	/**
 	 * @inheritDoc
@@ -61,7 +62,7 @@ class Scripts extends Object_Registry {
 		$script = $this->get( $script );
 
 		if ( is_wp_error( $script ) ) {
-			return underpin()->logger()->log_as_error(
+			return Logger::log_as_error(
 				'error',
 				'set_param_invalid_script',
 				'A param was not set because the script could not be found',
@@ -85,7 +86,7 @@ class Scripts extends Object_Registry {
 		$script = $this->get( $script );
 
 		if ( is_wp_error( $script ) ) {
-			return underpin()->logger()->log_as_error(
+			return Logger::log_as_error(
 				'error',
 				'set_param_inavlid_script',
 				'A param was not set because the script could not be found',
@@ -112,7 +113,7 @@ class Scripts extends Object_Registry {
 
 			return true;
 		} else {
-			return underpin()->logger()->log_as_error(
+			return Logger::log_as_error(
 				'error',
 				'script_not_enqueued',
 				'The specified script could not be enqueued because it has not been registered.',

@@ -1,11 +1,11 @@
 <?php
 
-namespace Underpin_Scripts\Abstracts;
+namespace Underpin\Scripts\Abstracts;
 
 
 use Underpin\Abstracts\Observer;
 use Underpin\Abstracts\Storage;
-use function Underpin\underpin;
+use Underpin\Loaders\Logger;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -23,9 +23,9 @@ abstract class Enqueue_Conditional extends Observer {
 			if ( $this->instance instanceof Script ) {
 				$this->instance->enqueue();
 			} else {
-				underpin()->logger()->log( 'warning', 'rest_middleware_action_failed_to_run', 'Middleware action failed to run. Rest_Middleware expects to run on a Script loader.', [
+				Logger::log( 'warning', 'rest_middleware_action_failed_to_run', 'Middleware action failed to run. Rest_Middleware expects to run on a Script loader.', [
 					'loader'  => get_class( $this->instance ),
-					'expects' => 'Underpin_Scripts\Abstracts\Script',
+					'expects' => 'Underpin\Scripts\Abstracts\Script',
 				] );
 			}
 		}

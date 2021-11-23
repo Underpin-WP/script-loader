@@ -13,8 +13,9 @@
     "underpin/underpin": "^2.0"
   },
   "autoload": {
+    "psr-4": {"Underpin\\Scripts\\":  "lib/"},
     "files": [
-      "scripts.php"
+      "bootstrap.php"
     ]
   }
 }

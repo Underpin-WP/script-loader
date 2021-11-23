@@ -1,13 +1,14 @@
 <?php
 
-namespace Underpin_Scripts\Factories;
+namespace Underpin\Scripts\Factories;
 
 
 use Underpin\Abstracts\Storage;
+use Underpin\Loaders\Logger;
 use Underpin\Traits\Instance_Setter;
-use Underpin_Scripts\Abstracts\Enqueue_Conditional;
-use Underpin_Scripts\Abstracts\Script;
-use function Underpin\underpin;
+use Underpin\Scripts\Abstracts\Enqueue_Conditional;
+use Underpin\Scripts\Abstracts\Script;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -32,9 +33,9 @@ class Enqueue_Script_Conditional extends Enqueue_Conditional {
 			if ( $this->loader_item instanceof Script ) {
 				$this->loader_item->enqueue();
 			} else {
-				underpin()->logger()->log( 'warning', 'rest_middleware_action_failed_to_run', 'Middleware action failed to run. Rest_Middleware expects to run on a Script loader.', [
+				Logger::log( 'warning', 'rest_middleware_action_failed_to_run', 'Middleware action failed to run. Rest_Middleware expects to run on a Script loader.', [
 					'loader'  => get_class( $this->loader_item ),
-					'expects' => 'Underpin_Scripts\Abstracts\Script',
+					'expects' => 'Underpin\Scripts\Abstracts\Script',
 				] );
 			}
 		}

@@ -1,5 +1,5 @@
 <?php
-namespace Underpin_Scripts\Factories;
+namespace Underpin\Scripts\Factories;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
