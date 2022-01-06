@@ -47,6 +47,7 @@ class Enqueue_Script_Conditional extends Enqueue_Conditional {
 
 	public function update( $instance, Storage $args ) {
 		parent::update( $instance, $args );
+		$this->loader_item = $instance;
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
 	}
 
